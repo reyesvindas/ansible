@@ -1,0 +1,17 @@
+---
+- hosts: "tag_Environment_{{env}}:&tag_Role_NFS_Main" 
+  remote_user: ubuntu
+  become: true
+
+  tasks:
+    - name: Ensure NFS utilities are installed.
+      apt: name={{ item }} state=installed update_cache=yes
+      with_items:
+        - nfs-common
+        - nfs-kernel-server
+
+    - name: copy /etc/exports
+      template: src=exports.j2 dest=/etc/exports owner=root group=root
+
+    - name: restart nfs server
+      service: name=nfs-kernel-server state=restarted

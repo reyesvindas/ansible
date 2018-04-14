@@ -1,0 +1,15 @@
+---
+    - hosts: "tag_Environment_{{env}}"
+      user: ubuntu
+#      - name: gather ec2 facts
+#        action: ec2_metadata_facts
+      tasks:
+      - name: copy halo script
+        copy:
+          src: /root/scripts/halo
+          dest: /tmp/
+          mode: 0755
+
+      - name: install halo
+        become: true
+        command: python /tmp/halo/HaloAgent.py

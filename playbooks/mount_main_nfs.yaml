@@ -1,0 +1,37 @@
+---
+
+    - hosts: "tag_Environment_{{env}}:&tag_Role_Web"
+      user: ubuntu
+
+      tasks:
+      - name: gather ec2 facts
+        action: ec2_facts
+
+      - name: remove server out of the ELB
+        local_action:
+          module: ec2_elb
+          instance_id: "{{ ansible_ec2_instance_id }}"
+          region: "{{ ec2_region }}"
+          state: absent
+
+      - name: remove NFS Secondary mount
+        become: true
+        mount: name=/data src="{{ hostvars[groups['tag_Role_NFS_Secondary'][0]]['ec2_private_ip_address'] }}:/data" fstype=nfs opts=defaults,nobootwait dump=0 passno=2 state=absent
+
+      - name: add NFS Main mount
+        become: true
+        mount: name=/data src="{{ hostvars[groups['tag_Role_NFS_Main'][0]]['ec2_private_ip_address']  }}:/data" fstype=nfs opts=defaults,nobootwait dump=0 passno=2 state=mounted
+
+      - name: reload Apache service
+        become: true
+        service:
+          name: apache2
+          state: reloaded
+
+      - name: add servers back to the ELB
+        local_action:
+          module: ec2_elb
+          instance_id: "{{ ansible_ec2_instance_id }}"
+          region: "{{ ec2_region }}"
+          ec2_elbs: "{{ elb_name }}"
+          state: present

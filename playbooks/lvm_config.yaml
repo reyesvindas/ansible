@@ -1,0 +1,20 @@
+---
+- hosts: "tag_Environment_{{env}}:&tag_Role_NFS_Main" 
+  vars:
+    lvm_groups:
+      - vgname: prod-vg
+        disks:
+          - /dev/xvdb
+          - /dev/xvdf
+        create: true 
+        lvnames:
+          - lvname: wordpress 
+            size: 100%FREE 
+            create: true
+            filesystem: ext4
+            mount: true
+            mntp: /mnt/wordpress
+    manage_lvm: true
+  roles:
+    - role: ansible-manage-lvm
+  tasks:
