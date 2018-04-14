@@ -1,1 +1,34 @@
+---
+
+- name: Download WP-CLI
+  shell: curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+- name: Make WP-CLI executable
+  file:
+    path: /home/ubuntu/wp-cli.phar
+    mode: u=rwx,g=rx,o=rx
+
+- name: Move WP-CLI to /usr/local/bin/wp
+  command: mv /home/ubuntu/wp-cli.phar /usr/local/bin/wp
+
+- name: Is WordPress downloaded?
+  stat: path=/var/www/index.php
+  register: wordpress_is_downloaded
+
+- name: Download WordPress
+  command: wp --allow-root core download
+  args:
+      chdir: /var/www/
+  when: wordpress_is_downloaded.stat.exists == False 
+
+- name: Configure WordPress
+  command: wp --allow-root core config
+           --path=/var/www/
+           --dbname="{{ wordpress_db_name }}"
+           --dbhost="{{ wordpress_db_host }}"
+           --dbuser="{{ wordpress_db_user }}"
+           --dbpass="{{ wordpress_db_user_pass }}"
+           --dbprefix="{{ wordpress_db_prefix }}"
+  when: wordpress_is_downloaded.stat.exists == False
+
 
