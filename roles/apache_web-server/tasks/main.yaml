@@ -1,1 +1,27 @@
+---
+ - name: Install Apache 
+   apt: name=apache2 state=present force=yes
 
+ - name: Create Apache Sites
+   template: src=apache_wp.conf.j2
+             dest=/etc/apache2/sites-available/apache_wp.conf
+
+ - name: Enable Sites
+   file: src=/etc/apache2/sites-available/apache_wp.conf
+         dest=/etc/apache2/sites-enabled/apache_wp.conf
+         owner=root
+         group=root
+         state=link
+
+ - name: Disable default sites
+   command: rm /etc/apache2/sites-enabled/000-default.conf
+
+ - name: Enable SSL Mod
+   apache2_module: name=ssl state=present
+
+ - name: Enable Rewrite Mod
+   apache2_module: name=rewrite state=present
+
+ - name: Enable Headers Mod
+   apache2_module: name=headers state=present
+   notify: reload apache2 
