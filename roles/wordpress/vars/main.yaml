@@ -1,1 +1,5 @@
-
+wordpress_db_name: tsc_wrp_prd 
+wordpress_db_host: tsc-prod.cf84n2k1jl8s.us-west-2.rds.amazonaws.com
+wordpress_db_user: tsc_wrp_usr 
+wordpress_db_user_pass: 8g1GYP76p77PH2VCls
+wordpress_db_prefix: wp_
