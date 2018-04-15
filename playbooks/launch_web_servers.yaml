@@ -31,7 +31,7 @@
         instance_tags:
           Role: web
           Environment: test
-        exact_count: "{{ instance_count }}"
+        exact_count: 2
         count_tag:
           Environment: test
       register: ec2_instances
