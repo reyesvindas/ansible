@@ -1,6 +1,7 @@
 ---
 
 - hosts: localhost
+  user: ubuntu
   tasks:
 
     - name: Create the ELB only listening over port 80
@@ -84,4 +85,3 @@
       with_items: "{{ ec2_instances.tagged_instances }}"
 
 
-      
