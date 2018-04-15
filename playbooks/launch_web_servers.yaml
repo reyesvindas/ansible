@@ -24,6 +24,8 @@
         instance_type: t2.nano
         image: ami-43a15f3e
         region: us-east-1
+        vpc_subnet_id: subnet-25aa750e
+        assign_public_ip: yes  
         group_id:
           - sg-db9430bf
           - sg-4995312d
