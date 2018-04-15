@@ -2,6 +2,7 @@
 
     - hosts: "tag_Environment_{{env}}:&tag_Role_Web"
       user: ubuntu
+      serial: 1
 
       tasks:
       - name: gather ec2 facts
