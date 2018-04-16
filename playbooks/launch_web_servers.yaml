@@ -31,11 +31,11 @@
           - sg-4995312d
         wait: yes
         instance_tags:
-          Role: web
+          Role: Web
           Environment: test
         exact_count: 2
         count_tag:
-          Role: web
+          Role: Web
       register: ec2_instances
 
     - name: Store EC2 instance IPs to provision against
