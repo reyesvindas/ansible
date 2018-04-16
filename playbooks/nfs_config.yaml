@@ -10,6 +10,9 @@
         - nfs-common
         - nfs-kernel-server
 
+    - name: create mount point
+      command: mkdir /mnt/wordpress
+
     - name: copy /etc/exports
       template: src=exports.j2 dest=/etc/exports owner=root group=root
 
