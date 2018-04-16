@@ -9,9 +9,7 @@
         name: "test-load-balancer"
         state: present
         region: us-east-1
-        zones:
-          - us-east-1d
-          - us-east-1e
+        subnets: 'subnet-25aa750e,subnet-f0b9c7ca,subnet-f59a2cac'
         listeners:
           - protocol: http
             load_balancer_port: 80
