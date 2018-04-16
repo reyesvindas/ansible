@@ -1,5 +1,6 @@
 ---
 - hosts: "tag_Environment_{{env}}:&tag_Role_Web"
+  serial: 1
   remote_user: ubuntu
   become: true
 
