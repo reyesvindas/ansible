@@ -42,6 +42,6 @@
   become: true
   tasks:
     - name: Install Python
-      raw: apt -y update && apt install -y python2.7-minimal
+      raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python2.7-minimal)"
 
 
