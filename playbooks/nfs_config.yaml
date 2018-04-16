@@ -1,5 +1,5 @@
 ---
-- hosts: "tag_Environment_{{env}}:&tag_Role_NFS_Main" 
+- hosts: "tag_Environment_{{env}}:&tag_Role_{{role}}" 
   remote_user: ubuntu
   become: true
 
