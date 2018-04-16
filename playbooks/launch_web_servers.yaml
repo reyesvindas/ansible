@@ -40,7 +40,7 @@
 
     - name: Store EC2 instance IPs to provision against
       add_host:
-        hostname: "{{ item.public_ip }}"
+        hostname: "{{ item.private_ip }}"
         groupname: ec2_instance_ips
       with_items: "{{ ec2_instances.tagged_instances }}"
 
