@@ -37,4 +37,11 @@
         timeout: 180
       with_items: "{{ ec2_instances.tagged_instances }}"
 
+- hosts: ec2_instance_ips
+  user: ubuntu
+  become: true
+  tasks:
+    - name: Install Python
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
 
