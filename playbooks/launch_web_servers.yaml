@@ -51,13 +51,6 @@
         timeout: 180
       with_items: "{{ ec2_instances.tagged_instances }}"
 
-    - name: Add EC2 instances as known hosts
-      known_hosts:
-        name: "{{ item.private_ip }}"
-        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item.private_ip) }}"
-      with_items: "{{ ec2_instances.tagged_instances }}"
-
-
 - hosts: localhost
   tasks:
     - name: Add each EC2 instance to the ELB
