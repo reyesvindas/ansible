@@ -38,6 +38,7 @@
       with_items: "{{ ec2_instances.tagged_instances }}"
 
 - hosts: ec2_instance_ips
+  gather_facts: False
   user: ubuntu
   become: true
   tasks:
