@@ -46,34 +46,16 @@
 
     - name: Wait for servers to come online
       wait_for:
-        host: "{{ item.public_ip }}"
+        host: "{{ item.private_ip }}"
         port: 22
         timeout: 180
       with_items: "{{ ec2_instances.tagged_instances }}"
 
     - name: Add EC2 instances as known hosts
       known_hosts:
-        name: "{{ item.public_ip }}"
-        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item.public_ip) }}"
+        name: "{{ item.private_ip }}"
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item.private_ip) }}"
       with_items: "{{ ec2_instances.tagged_instances }}"
-
-
-- hosts: ec2_instance_ips
-  remote_user: ubuntu
-  become: True
-  tasks:
-    - name: Install nginx
-      apt:
-        name: nginx
-        state: present
-    - name: Create default index page
-      copy:
-        dest: /usr/share/nginx/html/index.html
-        content: "Howdy from {{ ansible_hostname }}"
-    - name: Restart nginx
-      service:
-        name: nginx
-        state: restarted
 
 
 - hosts: localhost
