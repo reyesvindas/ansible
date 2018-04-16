@@ -21,7 +21,7 @@
           Environment: test
         exact_count: "{{ count }}"
         count_tag:
-          Environment: test
+          Role: "{{ role }}"
       register: ec2_instances
 
     - name: Store EC2 instance IPs to provision against
