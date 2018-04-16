@@ -1,5 +1,8 @@
 - src: https://github.com/reyesvindas/ansible/roles/apache_web-server
+  version: master
 
 - src: https://github.com/reyesvindas/ansible/roles/php
+  version: master
 
 - src: https://github.com/reyesvindas/ansible/roles/wordpress
+  version: master
