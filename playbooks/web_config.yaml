@@ -21,8 +21,8 @@
       file:
         src: /nfs
         dest: /var/www
-        owner: www-data
-        group: www-data
+        owner: root
+        group: root
         state: link
   
   roles:
