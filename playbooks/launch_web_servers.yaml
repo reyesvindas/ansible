@@ -10,6 +10,8 @@
         state: present
         region: us-east-1
         subnets: 'subnet-25aa750e,subnet-f0b9c7ca,subnet-f59a2cac'
+        security_group_ids:
+          - sg-6a95310e
         listeners:
           - protocol: http
             load_balancer_port: 80

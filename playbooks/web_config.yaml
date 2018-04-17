@@ -28,7 +28,7 @@
 
     - name: create link to NFS
       file:
-        src: /nfs
+        src: /mnt/wordpress
         dest: /var/www
         owner: www-data
         group: www-data
