@@ -59,6 +59,10 @@
   tasks:
     - name: Install Python
       raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python-minimal)"
+      retries: 3
+      delay: 5
+      register: result
+      until: result.rc == 0
 
 - hosts: localhost
   tasks:
