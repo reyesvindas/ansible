@@ -15,7 +15,7 @@
       file: path=/nfs state=directory mode=775 owner=root group=root
 
     - name: set mountpoints
-      mount: name=/nfs src="{{hostvars[groups['tag_Role_NFS_Main']|intersect(groups['tag_Environment_{{env}}'])][0]]['ec2_private_ip_address']}}:/mnt/wordpress" fstype=nfs opts=defaults dump=0 passno=2 state=mounted
+      mount: name=/nfs src="{{hostvars[groups['tag_Role_NFS_Main']|intersect(groups['tag_Environment_{{env}}'])[0]]['ec2_private_ip_address']}}:/mnt/wordpress" fstype=nfs opts=defaults dump=0 passno=2 state=mounted
 
     - name: rename www directory
       command: mv /var/www /var/www_old
