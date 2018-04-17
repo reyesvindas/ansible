@@ -16,8 +16,14 @@
 
     - name: set mountpoints
       mount: name=/nfs src="{{hostvars[groups['tag_Role_NFS_Main'][0]]['ec2_private_ip_address']}}:/mnt/wordpress" fstype=nfs opts=defaults dump=0 passno=2 state=mounted
+  
+  roles:
+   - apache_web-server
+   - php
+   - wordpress  
 
-    - name: rename www directory
+  post_tasks:
+    - name: rename www directory  
       command: mv /var/www /var/www_old
 
     - name: create link to NFS
@@ -27,8 +33,3 @@
         owner: www-data
         group: www-data
         state: link
-  
-  roles:
-   - apache_web-server
-   - php
-   - wordpress  
