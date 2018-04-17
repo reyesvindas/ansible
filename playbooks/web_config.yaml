@@ -30,7 +30,7 @@
    - php
    - wordpress  
 
-   post_tasks:
+  post_tasks:
     - name: restart apache
       service:
         name: apache2
