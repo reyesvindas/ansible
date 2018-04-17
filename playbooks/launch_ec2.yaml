@@ -15,6 +15,7 @@
         group_id:
           - sg-db9430bf
           - sg-4995312d
+          - sg-7ade931e
         wait: yes
         instance_tags:
           Role: "{{ role }}"
