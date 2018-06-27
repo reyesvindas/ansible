@@ -8,4 +8,4 @@
       service:
         name: aem61-publish
         state: started
-        become: true
+        become: yes
