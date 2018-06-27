@@ -1,6 +1,6 @@
 ---
 
-- hosts: localhost
+- hosts: 172.17.3.142
   user: ubuntu
   tasks:
 
