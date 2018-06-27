@@ -6,5 +6,5 @@
 
     - name: Start AEM service, if not running
       service:
-        name: aem63-publish
+        name: aem61-publish
         state: started
