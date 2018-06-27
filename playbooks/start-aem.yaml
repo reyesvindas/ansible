@@ -1,0 +1,10 @@
+---
+
+- hosts: localhost
+  user: ubuntu
+  tasks:
+
+    - name: Start AEM service, if not running
+      service:
+        name: aem63-publish
+        state: started
