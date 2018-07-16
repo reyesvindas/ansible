@@ -1,0 +1,10 @@
+---
+
+- hosts: 172.17.3.142
+  user: ubuntu
+  tasks:
+
+    - name: Start AEM service, if not running
+      service:
+        name: aem61-publish
+        state: stopped
