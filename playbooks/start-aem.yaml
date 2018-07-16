@@ -1,6 +1,6 @@
 ---
 
-- hosts: 172.17.3.142
+- hosts: 172.17.2.168
   user: ubuntu
   tasks:
 
