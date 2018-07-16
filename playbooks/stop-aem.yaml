@@ -4,7 +4,6 @@
   user: ubuntu
   tasks:
 
-      tasks:
       - name: Stop AEM service
         shell:
           sudo service aem61-author stop
