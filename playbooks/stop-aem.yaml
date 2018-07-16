@@ -4,7 +4,7 @@
   user: ubuntu
   tasks:
 
-    - name: Start AEM service, if not running
+    - name: Stop AEM service, if running
       service:
         name: aem61-publish
         state: stopped
