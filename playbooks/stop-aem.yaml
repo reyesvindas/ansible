@@ -4,7 +4,18 @@
   user: ubuntu
   tasks:
 
-    - name: Stop AEM service, if running
-      service:
-        name: aem61-publish
-        state: stopped
+      tasks:
+      - name: Stop AEM service
+        shell:
+          sudo service aem61-author stop
+        register: cmdline
+        become: true
+
+      - name: Check process
+        shell:
+          ps -aux | grep java | grep -v grep | grep 'adobe-aem6.1'
+        register: cmdline
+        failed_when: "cmdline.rc != 1"
+        until: cmdline.rc == 1
+        retries: 12
+        delay: 10
