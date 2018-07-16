@@ -6,7 +6,7 @@
 
       - name: Stop AEM service
         shell:
-          sudo service aem61-author stop
+          sudo service aem61-publish stop
         register: cmdline
         become: true
 
