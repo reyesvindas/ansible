@@ -12,7 +12,7 @@
 
       - name: Check process
         shell:
-          ps -aux | grep java | grep -v grep | grep 'adobe-aem6.1'
+          ps -elf | grep java | grep 'adobe-aem6.1'
         register: cmdline
         failed_when: "cmdline.rc != 1"
         until: cmdline.rc == 1
