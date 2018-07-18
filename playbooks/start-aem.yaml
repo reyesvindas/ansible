@@ -4,17 +4,17 @@
   user: ubuntu
   tasks:
 
-      - name: Start AEM service
+      - name: Stop AEM service
         shell:
-          sudo service aem61-publish start
+          sudo service aem61-publish stop
         register: cmdline
         become: true
 
-      - name: Validate Quick Started is completed
+      - name: Check process
         shell:
-           cat /data/adobe-aem6.1/publish/crx-quickstart/logs/startup.log | grep 'Quickstart started'
+          ps -elf | grep java | grep 'adobe-aem6.1'
         register: cmdline
-        failed_when: "cmdline.rc != 0"
-        until: cmdline.rc == 0
-        retries: 15
-        delay: 15
+        failed_when: "cmdline.rc > 1"
+        until: cmdline.rc == 1
+        retries: 12
+        delay: 10
