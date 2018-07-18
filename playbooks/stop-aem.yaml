@@ -14,7 +14,7 @@
         shell:
           ps -elf | grep java | grep 'adobe-aem6.1'
         register: cmdline
-        failed_when: "cmdline.rc != 1"
-        until: cmdline.rc == 1
+        failed_when: "cmdline.rc > 1"
+        until: cmdline.rc < 2
         retries: 12
         delay: 10
