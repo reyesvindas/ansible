@@ -1,12 +1,12 @@
 ---
 
-- hosts: 172.17.2.168
+- hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}};&tag_Role{{Role}}"
   user: ubuntu
   tasks:
 
       - name: Stop AEM service
         shell:
-          sudo service aem61-publish stop
+          "sudo service aem61-{{aem_run_mode}} stop"
         register: cmdline
         become: true
 
