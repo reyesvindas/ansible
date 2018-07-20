@@ -2,11 +2,13 @@
 
 - hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}};&tag_Role_{{Role}}"
   user: ubuntu
+  vars_files:
+    - aem-variables.yml
   tasks:
 
       - name: Stop AEM service
         shell:
-          "sudo service aem61-* stop"
+          "sudo service {{aem_service_name}} stop"
         register: cmdline
         become: true
 
