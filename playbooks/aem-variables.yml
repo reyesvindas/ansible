@@ -1,2 +1,3 @@
 aem_root_dir: /data/adobe-aem6.*/*
 aem_service_name: aem61-*
+aem_startup_complete_msg: 'Quickstart started'
