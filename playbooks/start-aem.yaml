@@ -1,6 +1,6 @@
 ---
 
-- hosts: "tag_Environment_{{Environment}}"
+- hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}};&tag_Role_{{Role}}"
   user: ubuntu
   vars_files:
     - aem-variables.yml
@@ -14,10 +14,9 @@
 
       - name: Validate Quick Started is completed
         shell:
-           "cat {{aem_root_dir}}/crx-quickstart/logs/startup.log | grep {{aem_startup_complete_msg}}"
+           "cat {{aem_root_dir}}/crx-quickstart/logs/startup.log | grep '{{aem_startup_complete_msg}}' "
         register: cmdline
         failed_when: "cmdline.rc != 0"
         until: cmdline.rc == 0
         retries: 15
         delay: 10
-        
