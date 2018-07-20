@@ -1,6 +1,6 @@
 ---
 
-- hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}};&tag_Role_{{Role}}"
+- hosts: "tag_Environment_{{Environment}}"
   user: ubuntu
   vars_files:
     - aem-variables.yml
@@ -20,3 +20,4 @@
         until: cmdline.rc == 0
         retries: 15
         delay: 10
+        
