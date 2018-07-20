@@ -1,20 +1,20 @@
 ---
 
-- hosts: 172.17.2.168
+- hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}};&tag_Role_{{Role}}"
   user: ubuntu
   tasks:
 
       - name: Start AEM service
         shell:
-          sudo service aem61-publish start
+          "sudo service aem61-* start"
         register: cmdline
         become: true
 
       - name: Validate Quick Started is completed
         shell:
-           cat /data/adobe-aem6.1/publish/crx-quickstart/logs/startup.log | grep 'Quickstart started'
+           "cat /data/adobe-aem6.*/*/crx-quickstart/logs/startup.log | grep 'Quickstart started'"
         register: cmdline
         failed_when: "cmdline.rc != 0"
         until: cmdline.rc == 0
         retries: 15
-        delay: 15
+        delay: 10
