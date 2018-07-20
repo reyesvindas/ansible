@@ -1,1 +1,2 @@
 aem_root_dir: /data/adobe-aem6.*/*
+aem_service_name: aem61-*
