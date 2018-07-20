@@ -2,17 +2,19 @@
 
 - hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}};&tag_Role_{{Role}}"
   user: ubuntu
+  vars_files:
+    - aem-variables.yml
   tasks:
 
       - name: Start AEM service
         shell:
-          "sudo service aem61-* start"
+          "sudo service {{aem_service_name}} start"
         register: cmdline
         become: true
 
       - name: Validate Quick Started is completed
         shell:
-           "cat /data/adobe-aem6.*/*/crx-quickstart/logs/startup.log | grep 'Quickstart started'"
+           "cat {{aem_root_dir}}/crx-quickstart/logs/startup.log | grep {{aem_startup_complete_msg}}"
         register: cmdline
         failed_when: "cmdline.rc != 0"
         until: cmdline.rc == 0
