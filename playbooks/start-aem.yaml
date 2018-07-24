@@ -20,3 +20,15 @@
         until: cmdline.rc == 0
         retries: 15
         delay: 10
+
+      - name: Validate all bundles are up
+        uri:
+          url: http://54.214.161.243:4502/crx/packmgr/index.jsp
+          status_code: "200"
+          user: admin
+          password: xt98m34p4kF4q$TB
+        register: response
+        until: response.status == 200
+        retries: "4"
+        delay: "5"
+        delegate_to: localhost
