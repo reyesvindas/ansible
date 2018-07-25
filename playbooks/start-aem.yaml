@@ -23,7 +23,7 @@
 
       - name: Validate all bundles are up
         uri:
-          url: http://54.214.161.243:4502/crx/packmgr/index.jsp
+          url: http://{{ ansible_ec2_instance_identity_document_privateip }}:4502/crx/packmgr/index.jsp
           status_code: "200"
           user: admin
           password: xt98m34p4kF4q$TB
