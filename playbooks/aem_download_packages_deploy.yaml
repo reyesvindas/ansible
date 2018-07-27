@@ -48,4 +48,5 @@
         shell:
           "ls -ltr {{ deoloy_local_folder_packages }}"
         register: list_files
-      -debug: var=list_files.stdout_lines
+      - debug: var=list_files.stdout_lines
+  
