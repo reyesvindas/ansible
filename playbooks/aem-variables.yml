@@ -4,5 +4,5 @@ aem_startup_complete_msg: 'Quickstart started'
 deoloy_local_folder_packages: "/data/temp_deploy/packages"
 deploy_s3_bucket_name: "dam-aem-packages-repository"
 deploy_s3_bucket_prefix_author: "deployments/author"
-aem_local_group_ owner: "cq"
-aem_local_user_ owner: "cq"
+aem_local_group_owner: "cq"
+aem_local_user_owner: "cq"
