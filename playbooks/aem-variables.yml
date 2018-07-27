@@ -1,8 +1,6 @@
 aem_root_dir: /data/adobe-aem6.*/*
 aem_service_name: aem61-*
 aem_startup_complete_msg: 'Quickstart started'
-deploy_read_only_aws_key: ""
-deploy_read_only_aws_secret: ""
 deoloy_local_folder_packages: "/data/temp_deploy/packages"
 deploy_s3_bucket_name: "dam-aem-packages-repository"
 deploy_s3_bucket_prefix_author: "deployments/author"
