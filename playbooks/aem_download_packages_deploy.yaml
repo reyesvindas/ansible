@@ -1,6 +1,6 @@
 ---
 
-- hosts: 127.0.0.1
+- hosts: localhost
   user: ubuntu
   become: true
   vars_files:
@@ -9,8 +9,45 @@
 
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
-          path: "/tmp/temp_deploy2/packages/DevelopmentIntegrated/IDL/Author2"
+          path: "{{ deoloy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
           state: directory
           mode: 0777
-          group: root
-          owner: root
+          group: "{{ aem_local_group_owner }}"
+          owner: "{{ aem_local_user_owner }}"
+
+
+      - name: " Delete files inside Deploy Directory "
+        file:
+          path: "{{ deoloy_local_folder_packages }}"
+          state: absent
+
+
+      - name: " List S3 Objects "
+        aws_s3:
+          bucket: "{{ deploy_s3_bucket_name }}"
+          prefix: "{{ deploy_s3_bucket_prefix_author }}"
+          mode: list
+          aws_access_key: "{{ deploy_read_only_aws_key }}"
+          aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+        register: s3Objects
+        debug: var=s3Objects
+
+
+      - name: " Download S3 object to local host "
+        aws_s3:
+          bucket: "dam-aem-packages-repo"
+          object: "{{ itme }}"
+          mode: get
+          dest: "{{ deoloy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/{{ item|basename }}"
+          aws_access_key: "{{ deploy_read_only_aws_key }}"
+          aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+          overwrite: always
+        with_items: "{{ s3Objects.s3_keys }}"
+        when: not item|basename == "" and '.zip' in item|basename
+
+      - name: " Debug files has been donwloaded"
+        shell:
+          "ls -ltr {{ deoloy_local_folder_packages }}"
+        register: list_files
+      - debug: var=list_files.stdout_lines
+  
