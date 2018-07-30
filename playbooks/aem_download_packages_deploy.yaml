@@ -9,6 +9,43 @@
 
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
-          path: "{{ deoloy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
+          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
           state: directory
           mode: 0777
+
+
+
+      - name: " Delete files inside Deploy Directory "
+        file:
+          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
+          state: absent
+
+
+      - name: " List S3 Objects "
+        aws_s3:
+          bucket: "{{ deploy_s3_bucket_name }}"
+          prefix: "{{ deploy_s3_bucket_prefix_author }}"
+          mode: list
+          aws_access_key: "{{ deploy_read_only_aws_key }}"
+          aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+        register: s3Objects
+
+
+      - name: " Download S3 object to local host "
+        aws_s3:
+          bucket: "{{ deploy_s3_bucket_name }}"
+          object: "{{ item }}"
+          mode: get
+          dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/{{ item|basename }}"
+          aws_access_key: "{{ deploy_read_only_aws_key }}"
+          aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+          overwrite: always
+        with_items: "{{ s3Objects.s3_keys }}"
+        when: not item|basename == "" and '.zip' in item|basename
+
+      - name: " Debug files has been donwloaded"
+        shell:
+          "ls -ltr {{ deoloy_local_folder_packages }}"
+        register: list_files
+      - debug: var=list_files.stdout_lines
+  
