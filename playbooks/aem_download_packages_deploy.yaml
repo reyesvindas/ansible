@@ -10,6 +10,9 @@
 
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
-          path: "/tmp/temp_deploy/packages/DevelopmentIntegrated/IDL/Author"
+          path: "/tmp/temp_deploy1/packages/DevelopmentIntegrated/IDL/Author"
           state: directory
           mode: 0777
+          group: root
+          owner: root
+
