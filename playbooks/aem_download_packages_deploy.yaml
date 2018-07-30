@@ -1,6 +1,7 @@
 ---
 
-- hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
+"tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
+- hosts: "localhost"
   user: ubuntu
   become: true
   vars_files:
@@ -9,7 +10,7 @@
 
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
-          path: "{{ deoloy_local_folder_packages }}"
+          path: "{{ deoloy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
           state: directory
           mode: 0777
           group: "{{ aem_local_group_owner }}"
