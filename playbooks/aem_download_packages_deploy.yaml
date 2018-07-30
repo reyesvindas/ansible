@@ -1,6 +1,6 @@
 ---
 
-- hosts: local
+- hosts: localhost
   delegate_to: localhost
   user: ubuntu
   become: true
