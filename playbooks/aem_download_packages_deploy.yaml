@@ -10,6 +10,6 @@
 
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
-          path: "{{ deoloy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
+          path: "/tmp/temp_deploy/packages/DevelopmentIntegrated/IDL/Author"
           state: directory
           mode: 0777
