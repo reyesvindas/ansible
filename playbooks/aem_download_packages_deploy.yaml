@@ -1,7 +1,6 @@
 ---
 
-- hosts: 127.0.0.1
-  connection: local
+- hosts: localhost
   user: ubuntu
   become: true
   vars_files:
@@ -10,9 +9,6 @@
 
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
-          path: "/tmp/temp_deploy1/packages/DevelopmentIntegrated/IDL/Author"
+          path: "/tmp/temp_deploy2/packages/DevelopmentIntegrated/IDL/Author"
           state: directory
-          mode: 0777
-          group: root
-          owner: root
 
