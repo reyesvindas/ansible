@@ -1,6 +1,6 @@
 ---
 
-- hosts: localhost
+- hosts: 10.0.0.69
   user: ubuntu
   become: true
   vars_files:
