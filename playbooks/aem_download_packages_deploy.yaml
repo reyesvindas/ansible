@@ -1,6 +1,5 @@
 ---
 
-"tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
 - hosts: "localhost"
   user: ubuntu
   become: true
@@ -13,8 +12,6 @@
           path: "{{ deoloy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
           state: directory
           mode: 0777
-          group: "{{ aem_local_group_owner }}"
-          owner: "{{ aem_local_user_owner }}"
 
 
       - name: " Delete files inside Deploy Directory "
