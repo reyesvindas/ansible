@@ -1,7 +1,6 @@
 ---
 
 - hosts: localhost
-  delegate_to: localhost
   user: ubuntu
   become: true
   vars_files:
