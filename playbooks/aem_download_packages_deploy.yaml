@@ -1,6 +1,6 @@
 ---
 
-- hosts: 10.0.0.69
+- hosts: 127.0.0.1
   user: ubuntu
   become: true
   vars_files:
