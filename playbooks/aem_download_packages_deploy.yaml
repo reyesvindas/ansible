@@ -11,4 +11,6 @@
         file:
           path: "/tmp/temp_deploy2/packages/DevelopmentIntegrated/IDL/Author2"
           state: directory
-
+          mode: 0777
+          group: root
+          owner: root
