@@ -17,6 +17,8 @@
           path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
           state: directory
           mode: 0777
+          group: "{{ aem_local_group_owner }}"
+          owner: "{{ aem_local_user_owner }}"
 
 
       - name: " List S3 Objects "
@@ -43,7 +45,7 @@
 
       - name: " Debug files has been donwloaded"
         shell:
-          "ls -ltr {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/{{ item|basename }}"
+          "ls -ltr {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
         register: list_files
       - debug: var=list_files.stdout_lines
 
@@ -51,3 +53,4 @@
         file:
           dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
           mode: "u=rwX,g=rX,o=rX"
+  
