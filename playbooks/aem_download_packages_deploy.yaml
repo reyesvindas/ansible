@@ -7,11 +7,6 @@
     - aem-variables.yml
   tasks:
 
-      - name: " Delete files inside Deploy Directory "
-        file:
-          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
-          state: absent
-
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
           path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
