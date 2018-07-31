@@ -16,7 +16,7 @@
 
       - name: " Delete files inside Deploy Directory "
         file:
-          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
+          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/*"
           state: absent
 
 
