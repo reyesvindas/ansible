@@ -1,55 +1,24 @@
 ---
 
-    - hosts: "tag_Environment_{{env}}:&tag_Role_Web:&tag_Project_{{project}}"
-      user: ubuntu
-      serial: 1
+- name: " Install AEM packages "
+  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
+  user: ubuntu
+  vars_files:
+    - aem-variables.yml
+  tasks:
 
-      tasks:
-      - name: gather ec2 facts
-        action: ec2_facts
 
-      - name: remove server out of the ELB
-        local_action:
-          module: ec2_elb
-          instance_id: "{{ ansible_ec2_instance_id }}"
-          region: "{{ ec2_region }}"
-          state: absent
+      - name: " Get list of all packages"
+        shell:
+          ls -1 {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}
+        register: files
+        delegate_to: localhost
+      - debug: var=files.stdout_lines
 
-      - name: security patching
-        become: true
-        apt:
-          upgrade: dist
-          update_cache: yes
-
-#      - name: debug variable
-#        debug:
-#          msg: "NFS MAIN IP: {{ hostvars[groups['tag_Role_NFS_Main'][1]]['ec2_private_ip_address']  }}"
-
-      - name: remove NFS MAIN mount
-        become: true
-        mount: name=/data src="{{ hostvars[groups['tag_Role_NFS_Main'][0]]['ec2_private_ip_address'] }}:/data" fstype=nfs opts=defaults,nobootwait dump=0 passno=2 state=absent
-
-      - name: add NFS Secondary mount
-        become: true
-        mount: name=/data src="{{ hostvars[groups['tag_Role_NFS_Secondary'][0]]['ec2_private_ip_address']  }}:/data" fstype=nfs opts=defaults,nobootwait dump=0 passno=2 state=mounted
-#        when: ec2_tag_Role == 'Web' 
-
-      - name: reboot the server
-        become: true
-        command: /sbin/shutdown -r now
-
-      - name: wait for host to restart
-        local_action:
-          module: wait_for
-          host: "{{ ansible_ec2_local_ipv4 }}"
-          port: 22
-          delay: 1
-          timeout: 300
-
-      - name: add servers back to the ELB
-        local_action:
-          module: ec2_elb
-          instance_id: "{{ ansible_ec2_instance_id }}"
-          region: "{{ ec2_region }}"
-          ec2_elbs: "{{ elb_name }}"
-          state: present
+      - name: " Install AEM packages "
+        shell:
+          curl -u 'admin:xt98m34p4kF4q$TB' -F force=true -F install=true -F file=@"{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/{{ item }}" http://{{ ansible_ec2_local_ipv4 }}:4502/crx/packmgr/service.jsp | tail -4 | grep 'code="200"'
+        delegate_to: localhost
+        with_items: "{{ files.stdout_lines }}"
+        register: result
+      - debug: var=result.stdout_lines
