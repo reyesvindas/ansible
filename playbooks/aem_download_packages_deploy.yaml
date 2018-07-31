@@ -7,6 +7,11 @@
     - aem-variables.yml
   tasks:
 
+      - name: " Delete files inside Deploy Directory "
+        file:
+          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
+          state: absent
+
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
           path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
@@ -26,7 +31,7 @@
 
       - name: " Download S3 object to local host "
         aws_s3:
-          bucket: "dam-aem-packages-repo"
+          bucket: "{{ deploy_s3_bucket_name }}"
           object: "{{ item }}"
           mode: get
           dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/{{ item|basename }}"
