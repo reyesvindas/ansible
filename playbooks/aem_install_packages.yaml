@@ -1,0 +1,24 @@
+---
+
+- name: " Install AEM packages "
+  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
+  user: ubuntu
+  vars_files:
+    - aem-variables.yml
+  tasks:
+
+
+      - name: " Get list of all packages"
+        shell:
+          ls -l {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}
+        register: files
+        delegate_to: localhost
+      - debug: var=files.stdout_lines
+
+      - name: " Install AEM packages "
+        shell:
+          cd {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}  && curl --fail -u "admin:xt98m34p4kF4q$TB" =F force=true -F install=true -F file=@"{{ item }}" http://172.17.0.49:4502/crx/packmgr/service.jsp | tail -4 | grep ' code="200" '
+        delegate_to: localhost
+        with_items: "{{ files.stdout_lines }}"
+        register: result
+      - debug: var=result.stdout_lines
