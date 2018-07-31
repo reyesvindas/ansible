@@ -10,7 +10,7 @@
 
       - name: " Get list of all packages"
         shell:
-          ls -l {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}
+          ls -1 {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}
         register: files
         delegate_to: localhost
       - debug: var=files.stdout_lines
