@@ -46,4 +46,8 @@
           "ls -ltr {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/{{ item|basename }}"
         register: list_files
       - debug: var=list_files.stdout_lines
-  
+
+      - name: " Set permissions to files downloaded "
+        file:
+          dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
+          mode: "u=rwX,g=rX,o=rX"
