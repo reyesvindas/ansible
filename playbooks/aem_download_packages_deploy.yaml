@@ -14,13 +14,6 @@
           mode: 0777
 
 
-
-      - name: " Delete files inside Deploy Directory "
-        file:
-          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
-          state: absent
-
-
       - name: " List S3 Objects "
         aws_s3:
           bucket: "{{ deploy_s3_bucket_name }}"
