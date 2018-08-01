@@ -13,9 +13,11 @@
 
       - name: Obtain EC2 tags
         ec2_tag:
-          region: us-west-2a
-          resource: i-0d9b8a6f6251d8d6f
+          region: "{{ ansible_ec2_placement_region }}"
+          resource: "{{ ansible_ec2_instance_id }}"
           state: list
+          aws_access_key: "{{ ANSIBLE_IAM_KEY }}"
+          aws_secret_key: "{{ ANSIBLE_IAM_SECRET }}"
         delegate_to: localhost
         register: ec2_tags
 
