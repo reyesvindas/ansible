@@ -16,7 +16,7 @@
           region: "{{ ansible_ec2_placement_region }}"
           resource: "{{ ansible_ec2_instance_id }}"
           state: list
-          aws_access_key: "{{ aaws_key }}"
+          aws_access_key: "{{ aws_key }}"
           aws_secret_key: "{{ aws_secret }}"
         delegate_to: localhost
         register: ec2_tags
