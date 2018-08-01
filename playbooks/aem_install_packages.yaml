@@ -12,11 +12,11 @@
         action: ec2_metadata_facts
 
       - name: Obtain EC2 tags
-        local_action:
-          module: ec2_tag
+        ec2_tag:
           region: "{{ ansible_ec2_placement_region }}"
           resource: "{{ ansible_ec2_instance_id }}"
           state: list
+        delegate_to: localhost
         register: ec2_tags
 
       - name: " Get list of all packages"
