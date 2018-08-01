@@ -8,6 +8,9 @@
   tasks:
 
 
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
+
       - name: " Get list of all packages"
         shell:
           ls -1 {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}
