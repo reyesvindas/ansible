@@ -11,6 +11,14 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
+      - name: Obtain EC2 tags
+        local_action:
+          module: ec2_tag
+          region: "{{ ansible_ec2_placement_region }}"
+          resource: "{{ ansible_ec2_instance_id }}"
+          state: list
+        register: ec2_tags
+
       - name: " Get list of all packages"
         shell:
           ls -1 {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}
@@ -20,7 +28,7 @@
 
       - name: " Install AEM packages "
         shell:
-          curl -u 'admin:xt98m34p4kF4q$TB' -F force=true -F install=true -F file=@"{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ tag_name_Role }}/{{ item }}" http://{{ ansible_ec2_local_ipv4 }}:{{ tag_name_AEMPort }}/crx/packmgr/service.jsp | tail -4 | grep 'code="200"'
+          curl -u 'admin:xt98m34p4kF4q$TB' -F force=true -F install=true -F file=@"{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ ec2_tags.tags.Role }}/{{ item }}" http://{{ ansible_ec2_local_ipv4 }}:{{ ec2_tags.tags.AEMPort }}/crx/packmgr/service.jsp | tail -4 | grep 'code="200"'
         delegate_to: localhost
         with_items: "{{ files.stdout_lines }}"
         register: result
