@@ -6,6 +6,9 @@
     - aem-variables.yml
   tasks:
 
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
+
       - name: Stop AEM service
         shell:
           "sudo service {{aem_service_name}} stop"
@@ -15,7 +18,7 @@
 
       - name: Check process
         shell:
-          ps -elf | grep java | grep 'adobe-aem6.1'
+          ps -elf | grep java | grep '"{{ aem_root_dir }}"''
         register: cmdline
         failed_when: "cmdline.rc > 1"
         until: cmdline.rc < 2
