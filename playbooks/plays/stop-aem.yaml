@@ -1,0 +1,28 @@
+---
+
+- hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
+  user: ubuntu
+  vars_files:
+    - aem-variables.yml
+    - aem-vault.yml
+    
+  tasks:
+
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
+
+      - name: Stop AEM service
+        shell:
+          "sudo service {{aem_service_name}} stop"
+        register: cmdline
+        become: true
+
+
+      - name: Check process
+        shell:
+          ps -elf | grep java | grep "{{ aem_root_dir }}"
+        register: cmdline
+        failed_when: "cmdline.rc > 1"
+        until: cmdline.rc < 2
+        retries: 12
+        delay: 10
