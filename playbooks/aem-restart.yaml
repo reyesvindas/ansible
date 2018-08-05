@@ -1,0 +1,11 @@
+- import_playbook: plays/stop-aem.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+
+- import_playbook: plays/start-aem.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
