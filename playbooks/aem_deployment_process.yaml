@@ -1,0 +1,7 @@
+- import_playbook: aem_download_packages_deploy.yaml
+
+- import_playbook: aem_install_packages.yaml
+
+- import_playbook: stop-aem.yaml
+
+- import_playbook: start-aem.yaml
