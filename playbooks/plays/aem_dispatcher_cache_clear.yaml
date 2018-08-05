@@ -10,7 +10,7 @@
   tasks:
 
 
-      - import_playbook: aws-get-ec2-facts.yaml
+      - include_playbook: aws-get-ec2-facts.yaml
 
       - name: " Delete cache inside dam/libs folder "
         file:
