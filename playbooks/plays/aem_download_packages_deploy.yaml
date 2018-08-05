@@ -22,8 +22,6 @@
           path: "{{ deploy_local_folder_packages }}/{{ ec2_tag_Environment }}/{{ ec2_tag_Usage }}/{{ ec2_tag_Role }}"
           state: directory
           mode: 0777
-          group: "{{ ansible_aws_local_group_owner }}"
-          owner: "{{ ansible_aws_local_user_owner }}"
 
 
       - name: " List S3 Objects "
