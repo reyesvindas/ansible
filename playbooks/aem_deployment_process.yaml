@@ -1,6 +1,14 @@
 - import_playbook: plays/stop-aem.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
 
 - import_playbook: plays/start-aem.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
 
 - import_playbook: plays/aem_download_packages_deploy.yaml
   var_files:
@@ -8,9 +16,24 @@
     - aem-vault.yml
   vars:
     deploy_s3_bucket_prefix: "{{ deploy_s3_bucket_prefix_config_task_deploy }}"
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
 
 - import_playbook: plays/aem_install_packages.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
 
 - import_playbook: plays/stop-aem.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
 
 - import_playbook: plays/start-aem.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
