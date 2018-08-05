@@ -6,11 +6,10 @@
   vars_files:
     - aem-variables.yml
     - aem-vault.yml
-    
+
   tasks:
 
-      - name: gather ec2 facts
-        action: ec2_metadata_facts
+      - include_playbook: aws-get-ec2-facts.yaml
 
       - name: " Delete files inside Deploy Directory "
         file:
