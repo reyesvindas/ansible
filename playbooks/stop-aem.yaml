@@ -18,7 +18,7 @@
 
       - name: Check process
         shell:
-          ps -elf | grep java | grep "{{ aem_root_dir }}"
+          ps -elf | grep java | grep 'aem6*'
         register: cmdline
         failed_when: "cmdline.rc > 1"
         until: cmdline.rc < 2
