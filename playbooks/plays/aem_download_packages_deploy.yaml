@@ -24,7 +24,7 @@
           mode: 0777
 
 
-      - name: " List S3 Objects "
+    - name: " List S3 Objects "
         aws_s3:
           bucket: "{{ deploy_s3_bucket_name }}"
           prefix: "{{ deploy_s3_bucket_prefix }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
@@ -32,6 +32,7 @@
           aws_access_key: "{{ deploy_read_only_aws_key }}"
           aws_secret_key: "{{ deploy_read_only_aws_secret }}"
         register: s3Objects
+        debug: var=deploy_s3_bucket_prefix
 
 
       - name: " Download S3 object to local host "
