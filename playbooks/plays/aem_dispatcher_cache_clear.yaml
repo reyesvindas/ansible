@@ -16,4 +16,4 @@
         file:
           path: "{{ daem_dispatcher_home_dir }}/{{ item.value.dir_name }}/"
           state: absent
-        with_dict: aem_dispatcher_cache_dirs
+        with_dict: "{{ aem_dispatcher_cache_dirs }}"
