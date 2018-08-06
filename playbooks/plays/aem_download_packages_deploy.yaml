@@ -32,7 +32,6 @@
           aws_access_key: "{{ deploy_read_only_aws_key }}"
           aws_secret_key: "{{ deploy_read_only_aws_secret }}"
         register: s3Objects
-        debug: var=deploy_s3_bucket_prefix
 
 
 
