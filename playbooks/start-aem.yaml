@@ -3,8 +3,8 @@
 - hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
   user: ubuntu
   vars_files:
-    - ../aem-variables.yml
-    - ../aem-vault.yml
+    - aem-variables.yml
+    - aem-vault.yml
 
   tasks:
 
