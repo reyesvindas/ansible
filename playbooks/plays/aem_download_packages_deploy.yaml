@@ -11,8 +11,8 @@
 
       - name: gather ec2 facts
         action: ec2_metadata_facts
-        
-    - name: " List S3 Objects "
+
+      - name: " List S3 Objects "
         aws_s3:
           bucket: "dam-aem-packages-repository"
           prefix: "deployments/{{ Environment }}/{{ Usage }}/{{ Role }}"
@@ -20,4 +20,3 @@
           aws_access_key: "{{ deploy_read_only_aws_key }}"
           aws_secret_key: "{{ deploy_read_only_aws_secret }}"
         register: s3Objects
-        debug: var=deploy_s3_bucket_prefix
