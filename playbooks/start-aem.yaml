@@ -3,7 +3,9 @@
 - hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
   user: ubuntu
   vars_files:
-    - aem-variables.yml
+    - ../aem-variables.yml
+    - ../aem-vault.yml
+
   tasks:
 
       - name: gather ec2 facts
@@ -23,4 +25,5 @@
         until: cmdline.rc == 0
         retries: 15
         delay: 15
+
 
