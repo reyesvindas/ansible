@@ -5,7 +5,7 @@
   vars_files:
     - ../aem-variables.yml
     - ../aem-vault.yml
-    
+
   tasks:
 
       - name: gather ec2 facts
@@ -13,7 +13,7 @@
 
       - name: Stop AEM service
         shell:
-          "sudo service {{aem_service_name}} stop"
+          "sudo service {{ aem_service_name }} stop"
         register: cmdline
         become: true
 
@@ -23,6 +23,6 @@
           ps -elf | grep java | grep 'adobe*'
         register: cmdline
         failed_when: "cmdline.rc > 1"
-        until: cmdline.rc < 2
+        until: cmdline.rc == 1
         retries: 12
         delay: 10
