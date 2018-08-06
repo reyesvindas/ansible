@@ -1,35 +1,4 @@
-- import_playbook: plays/stop-aem.yaml
-  vars:
-    Environment: "{{ Environment }}"
-    Usage: "{{ Usage }}"
-    Role: "{{ Role }}"
-
-- import_playbook: plays/start-aem.yaml
-  vars:
-    Environment: "{{ Environment }}"
-    Usage: "{{ Usage }}"
-    Role: "{{ Role }}"
-
-- import_playbook: plays/aem_download_packages_deploy.yaml
-  vars:
-    deploy_s3_bucket_prefix: "deployments"
-    Environment: "{{ Environment }}"
-    Usage: "{{ Usage }}"
-    Role: "{{ Role }}"
-
-- import_playbook: plays/aem_install_packages.yaml
-  vars:
-    Environment: "{{ Environment }}"
-    Usage: "{{ Usage }}"
-    Role: "{{ Role }}"
-
-- import_playbook: plays/stop-aem.yaml
-  vars:
-    Environment: "{{ Environment }}"
-    Usage: "{{ Usage }}"
-    Role: "{{ Role }}"
-
-- import_playbook: plays/start-aem.yaml
+- import_playbook: plays/aem_dispatcher_cache_clear.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
