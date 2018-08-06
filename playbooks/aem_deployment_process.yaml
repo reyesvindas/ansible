@@ -1,6 +1,6 @@
 - import_playbook: plays/aem_download_packages_deploy.yaml
   vars:
-    deploy_s3_bucket_prefix: "{{ deploy_s3_bucket_prefix_config_task_deploy }}"
+    deploy_s3_bucket_prefix: "deployments"
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
