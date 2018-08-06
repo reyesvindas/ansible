@@ -4,8 +4,8 @@
   user: ubuntu
   become: true
   vars_files:
-    - aem-variables.yml
-    - aem-vault.yml
+    - ../aem-variables.yml
+    - ../aem-vault.yml
 
   tasks:
     
