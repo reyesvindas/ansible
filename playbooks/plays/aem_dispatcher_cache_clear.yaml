@@ -8,9 +8,9 @@
     - aem-vault.yml
 
   tasks:
-
-
-      - include_playbook: aws-get-ec2-facts.yaml
+    
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
 
       - name: " Delete cache inside dam/libs folder "
         file:
