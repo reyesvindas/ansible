@@ -4,3 +4,5 @@
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    deploy_read_only_aws_key: "{{ deploy_read_only_aws_key }}"
+    deploy_read_only_aws_secret: "{{ deploy_read_only_aws_secret }}"
