@@ -8,7 +8,8 @@
 
   tasks:
 
-      - include_playbook: aws-get-ec2-facts.yaml
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
 
       - name: Start AEM service
         shell:
@@ -24,3 +25,16 @@
         until: cmdline.rc == 0
         retries: 15
         delay: 15
+
+      - name: Validate all bundles are up
+        uri:
+          url: http://{{ ansible_ec2_local_ipv4  }}:{{ ec2_tag_AEMPort }}/crx/de/index.jsp
+          status_code: "200"
+          user: "{{ aem_user_name_[ec2_tag_Environment] }}"
+          password: "{{ aem_user_password_[ec2_tag_Environment] }}"
+        register: response
+        until: response.status == 200
+        retries: "4"
+        delay: "5"
+        delegate_to: localhost
+
