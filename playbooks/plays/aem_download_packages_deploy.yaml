@@ -8,8 +8,9 @@
     - aem-vault.yml
 
   tasks:
-
-      - include_playbook: aws-get-ec2-facts.yaml
+    
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
 
       - name: " Delete files inside Deploy Directory "
         file:
@@ -21,6 +22,8 @@
           path: "{{ deploy_local_folder_packages }}/{{ ec2_tag_Environment }}/{{ ec2_tag_Usage }}/{{ ec2_tag_Role }}"
           state: directory
           mode: 0777
+          group: "{{ ansible_aws_local_group_owner }}"
+          owner: "{{ ansible_aws_local_user_owner }}"
 
 
       - name: " List S3 Objects "
