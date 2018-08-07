@@ -14,12 +14,12 @@
 
       - name: " Delete files inside Deploy Directory "
         file:
-          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}/"
+          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
           state: absent
 
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
-          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}"
+          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
           state: directory
           mode: 0777
 
@@ -49,12 +49,12 @@
 
       - name: " Debug files has been donwloaded"
         shell:
-          "ls -ltr {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}"
+          "ls -ltr {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
         register: list_files
       - debug: var=list_files.stdout_lines
 
       - name: " Set permissions to files downloaded "
         file:
-          dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}/"
+          dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
           mode: "u=rwX,g=rX,o=rX"
   
