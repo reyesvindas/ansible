@@ -1,0 +1,53 @@
+- name: gather ec2 facts
+  action: ec2_metadata_facts
+
+- name: " Delete files inside Deploy Directory "
+  file:
+    path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}/"
+    state: absent
+  delegate_to: localhost
+
+- name: " Create temp Deploy Directory if doesn't exists "
+  file:
+    path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}"
+    state: directory
+    mode: 0777
+  delegate_to: localhost
+
+- name: " List S3 Objects "
+  aws_s3:
+    bucket: "{{ deploy_s3_bucket_name }}"
+    prefix: "{{ deploy_s3_bucket_prefix }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
+    mode: list
+    aws_access_key: "{{ deploy_read_only_aws_key }}"
+    aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+  register: s3Objects
+  delegate_to: localhost
+
+
+- name: " Download S3 object to local host "
+  aws_s3:
+    bucket: "{{ deploy_s3_bucket_name }}"
+    object: "{{ item }}"
+    mode: get
+    dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}/{{ item|basename }}"
+    aws_access_key: "{{ deploy_read_only_aws_key }}"
+    aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+    overwrite: always
+  with_items: "{{ s3Objects.s3_keys }}"
+  when: not item|basename == "" and '.zip' in item|basename
+  delegate_to: localhost
+
+- name: " Debug files has been donwloaded"
+  shell:
+    "ls -ltr {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}"
+  register: list_files
+  delegate_to: localhost
+- debug: var=list_files.stdout_lines
+
+- name: " Set permissions to files downloaded "
+  file:
+    dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}/"
+    mode: "u=rwX,g=rX,o=rX"
+  delegate_to: localhost
+  
