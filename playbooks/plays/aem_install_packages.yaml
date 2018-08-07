@@ -12,7 +12,7 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
-      - include_tasks: aem_download_packages_deploy.yaml
+      - include_tasks: aem_download_packages_deploy.yml
         vars:
           deploy_s3_bucket_prefix: "deployments"
           Environment: "{{ Environment }}"
