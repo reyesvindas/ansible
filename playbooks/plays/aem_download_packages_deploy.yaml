@@ -1,25 +1,14 @@
----
-
-- hosts: localhost
-  user: ubuntu
-  become: true
-  vars_files:
-    - ../aem-variables.yml
-    - ../aem-vault.yml
-
-  tasks:
-
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
       - name: " Delete files inside Deploy Directory "
         file:
-          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
+          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}/"
           state: absent
 
       - name: " Create temp Deploy Directory if doesn't exists "
         file:
-          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
+          path: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}"
           state: directory
           mode: 0777
 
@@ -40,7 +29,7 @@
           bucket: "{{ deploy_s3_bucket_name }}"
           object: "{{ item }}"
           mode: get
-          dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/{{ item|basename }}"
+          dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}/{{ item|basename }}"
           aws_access_key: "{{ deploy_read_only_aws_key }}"
           aws_secret_key: "{{ deploy_read_only_aws_secret }}"
           overwrite: always
@@ -49,12 +38,12 @@
 
       - name: " Debug files has been donwloaded"
         shell:
-          "ls -ltr {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
+          "ls -ltr {{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}"
         register: list_files
       - debug: var=list_files.stdout_lines
 
       - name: " Set permissions to files downloaded "
         file:
-          dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Role }}/"
+          dest: "{{ deploy_local_folder_packages }}/{{ Environment }}/{{ Usage }}/{{ Name }}/"
           mode: "u=rwX,g=rX,o=rX"
   
