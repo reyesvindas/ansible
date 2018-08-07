@@ -18,7 +18,6 @@
           Environment: "{{ Environment }}"
           Usage: "{{ Usage }}"
           Role: "{{ Role }}"
-          Name: "{{ ec2_tag_Name }}"
 
       - name: " Get list of all packages"
         shell:
