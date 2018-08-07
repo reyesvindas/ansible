@@ -12,14 +12,6 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
-      - import_tasks: aem_download_packages_deploy.yaml
-        vars:
-          deploy_s3_bucket_prefix: "deployments"
-          Environment: "{{ Environment }}"
-          Usage: "{{ Usage }}"
-          Role: "{{ Role }}"
-          Name: "{{ ec2_tag_Name }}"
-
       - name: " Get list of all packages"
         shell:
           ls -1 {{ deploy_local_folder_packages }}/{{ ec2_tag_Environment }}/{{ ec2_tag_Usage }}/{{ ec2_tag_Role }}
