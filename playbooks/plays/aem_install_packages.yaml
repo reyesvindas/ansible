@@ -12,15 +12,13 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
-      - name: Download Code Packages
+      - include_tasks: aem_download_packages_deploy.yaml
         vars:
           deploy_s3_bucket_prefix: "deployments"
           Environment: "{{ Environment }}"
           Usage: "{{ Usage }}"
           Role: "{{ Role }}"
           Name: "{{ ec2_tag_Name }}"
-        tasks:
-          - include_tasks: aem_download_packages_deploy.yaml
         delegate_to: localhost
 
       - name: " Get list of all packages"
