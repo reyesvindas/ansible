@@ -19,8 +19,8 @@
           Usage: "{{ Usage }}"
           Role: "{{ Role }}"
           Name: "{{ ec2_tag_Name }}"
-          deploy_read_only_aws_key: {{ deploy_read_only_aws_key }}
-          deploy_read_only_aws_secret: {{ deploy_read_only_aws_secret }}
+          deploy_read_only_aws_key: "{{deploy_read_only_aws_key}}"
+          deploy_read_only_aws_secret: "{{deploy_read_only_aws_secret}}"
 
 
       - name: " Get list of all packages"
