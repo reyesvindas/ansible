@@ -13,6 +13,9 @@
         action: ec2_metadata_facts
 
       - include_tasks: ../tasks/aem_download_packages_deploy.yml
+        vars_files:
+          - ../aem-variables.yml
+          - ../aem-vault.yml
         vars:
           deploy_s3_bucket_prefix: "deployments"
           Environment: "{{ Environment }}"
