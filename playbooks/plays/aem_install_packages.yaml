@@ -16,6 +16,8 @@
         vars:
           deploy_s3_bucket_name: "{{ deploy_s3_bucket_name }}"
           deploy_s3_bucket_prefix: "deployments"
+          deploy_read_only_aws_key: "{{ deploy_read_only_aws_key }}"
+          deploy_read_only_aws_secret: "{{ deploy_read_only_aws_secret }}"
           Environment: "{{ Environment }}"
           Usage: "{{ Usage }}"
           Role: "{{ Role }}"
