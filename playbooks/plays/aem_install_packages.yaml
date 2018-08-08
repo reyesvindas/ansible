@@ -22,14 +22,14 @@
 
       - name: " Get list of all packages"
         shell:
-          ls -1 {{ deploy_local_folder_packages }}/{{ ec2_tag_Environment }}/{{ ec2_tag_Usage }}/{{ ec2_tag_Role }}
+          ls -1 {{ deploy_local_folder_packages }}/{{ ec2_tag_Environment }}/{{ ec2_tag_Usage }}/{{ ec2_tag_Name }}
         register: files
         delegate_to: localhost
       - debug: var=files.stdout_lines
 
       - name: " Install AEM packages "
         shell:
-          curl -u '{{ aem_user_name_DevelopmentIntegrated }}:{{ aem_user_password_DevelopmentIntegrated }}' -F force=true -F install=true -F file=@"{{ deploy_local_folder_packages }}/{{ ec2_tag_Environment }}/{{ ec2_tag_Usage }}/{{ ec2_tag_Role }}/{{ item }}" http://{{ ansible_ec2_local_ipv4 }}:{{ ec2_tag_AEMPort }}/crx/packmgr/service.jsp | tail -4 | grep 'code="200"'
+          curl -u '{{ aem_user_name_DevelopmentIntegrated }}:{{ aem_user_password_DevelopmentIntegrated }}' -F force=true -F install=true -F file=@"{{ deploy_local_folder_packages }}/{{ ec2_tag_Environment }}/{{ ec2_tag_Usage }}/{{ ec2_tag_Name }}/{{ item }}" http://{{ ansible_ec2_local_ipv4 }}:{{ ec2_tag_AEMPort }}/crx/packmgr/service.jsp | tail -4 | grep 'code="200"'
         delegate_to: localhost
         with_items: "{{ files.stdout_lines }}"
         register: result
