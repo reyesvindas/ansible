@@ -1,7 +1,7 @@
 ---
 
 - name: " Install AEM packages "
-  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}"
+  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_YES"
   user: ubuntu
   vars_files:
     - ../aem-variables.yml
