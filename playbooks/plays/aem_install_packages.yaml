@@ -14,7 +14,6 @@
 
       - include_tasks: ../tasks/aem_download_packages_deploy.yml
         vars:
-          deploy_s3_bucket_name: "{{ deploy_s3_bucket_name }}"
           deploy_s3_bucket_prefix: "deployments"
           Environment: "{{ Environment }}"
           Usage: "{{ Usage }}"
