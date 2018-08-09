@@ -16,7 +16,7 @@
 
 - name: " List S3 Objects "
   aws_s3:
-    bucket: "{{ deploy_s3_bucket_name }}"
+    bucket: "{{ deploy_s3_bucket_prefix }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
     prefix: "{{ deploy_s3_bucket_prefix }}/{{ Environment }}/{{ Usage }}/{{ Role }}"
     mode: list
     aws_access_key: "{{ deploy_read_only_aws_key }}"
