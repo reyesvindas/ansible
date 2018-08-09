@@ -20,7 +20,7 @@
           deploy_s3_bucket_prefix: "deployments"
           Environment: "{{ Environment }}"
           Usage: "{{ Usage }}"
-          Role: "{{ Role }}"
+          Role: "{{ ec2_tag_Role }}"
           Name: "{{ ec2_tag_Name }}"
 
 
