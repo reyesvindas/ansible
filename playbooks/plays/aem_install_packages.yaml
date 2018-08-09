@@ -17,7 +17,8 @@
           - ../aem-variables.yml
           - ../aem-vault.yml
         vars:
-          deploy_s3_bucket_prefix: "deployments"
+          deploy_s3_bucket_prefix: "dam-aem-packages-repository"
+          deploy_s3_bucket_prefix2: "deployments"
           Environment: "{{ Environment }}"
           Usage: "{{ Usage }}"
           Role: "{{ ec2_tag_Role }}"
