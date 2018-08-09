@@ -13,16 +13,8 @@
         action: ec2_metadata_facts
 
       - include_tasks: ../tasks/aem_download_packages_deploy.yml
-        vars_files:
-          - ../aem-variables.yml
-          - ../aem-vault.yml
         vars:
-          deploy_s3_bucket_prefix: "dam-aem-packages-repository"
-          deploy_s3_bucket_prefix2: "deployments"
-          Environment: "{{ Environment }}"
-          Usage: "{{ Usage }}"
-          Role: "{{ ec2_tag_Role }}"
-          Name: "{{ ec2_tag_Name }}"
+          deploy_s3_bucket_prefix: "deployments"
 
 
       - name: " Get list of all packages"
