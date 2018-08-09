@@ -17,8 +17,6 @@
           - ../aem-variables.yml
           - ../aem-vault.yml
         vars:
-          deploy_s3_bucket_name: "{{ deploy_s3_bucket_name }}"
-          deploy_s3_bucket_prefix: "deployments"
           Environment: "{{ Environment }}"
           Usage: "{{ Usage }}"
           Role: "{{ Role }}"
