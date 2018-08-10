@@ -29,5 +29,4 @@
           aws_access_key: "{{ deploy_read_only_aws_key }}"
           aws_secret_key: "{{ deploy_read_only_aws_secret }}"
         with_items: "{{ s3Objects.s3_keys }}"
-        when: not item|basename == "" and '.zip' in item|basename
   
