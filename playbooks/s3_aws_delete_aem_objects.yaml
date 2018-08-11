@@ -4,8 +4,8 @@
   hosts: "localhost"
   user: ubuntu
   vars_files:
-    - ../aem-variables.yml
-    - ../aem-vault.yml
+    - aem-variables.yml
+    - aem-vault.yml
 
   tasks:
 
