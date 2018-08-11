@@ -1,0 +1,4 @@
+
+- import_playbook: plays/aws_delete_s3.yaml
+  vars:
+    prefix_name: "deployments/{{ Environment }}/{{ Usage }}/{{ Role }}"
