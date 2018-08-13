@@ -10,7 +10,7 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
-      - include_tasks: ../tasks/s3_delete_content.yaml
+      - include_tasks: ../tasks/s3_delete_content.yml
         vars_files:
           - ../aem-variables.yml
           - ../aem-vault.yml
