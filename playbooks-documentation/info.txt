@@ -1,8 +1,10 @@
 -----------Info.txt------------
 
-This a set of files that will explain the purpose, usage, implemeation and how to use each task, play or playbook within parent foler: "ansible/playooks".
+This a set of files that will explain the purpose, usage, implemeation and how to use each task, play or playbook
+within parent foler: "ansible/playooks".
 
-Within this folder you will find the same file tree structure as in "ansible/playbooks". However, each file will represent a text documentation for each task,play or playbook instead of a YAML file.
+Within this folder you will find the same file tree structure as in "ansible/playbooks".
+However, each file will represent a text documentation for each task,play or playbook instead of a YAML file.
 
 
 -----------Info.txt------------
