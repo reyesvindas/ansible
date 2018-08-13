@@ -1,3 +1,4 @@
+
 ---
 
 - name: " Delete AEM packages from S3 "
@@ -9,7 +10,10 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
-- import_playbook: plays/aws_delete_s3.yaml
-  vars:
-    prefix_name: "deployments/{{ Environment }}/{{ Usage }}/{{ ec2_tag_Role }}"
+      - include_tasks: ../tasks/s3_delete_content.yaml
+        vars_files:
+          - ../aem-variables.yml
+          - ../aem-vault.yml
+        vars:
+          prefix_name: "deployments/{{ Environment }}/{{ Usage }}/{{ ec2_tag_Role }}"
 
