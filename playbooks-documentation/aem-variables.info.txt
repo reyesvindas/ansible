@@ -1,0 +1,55 @@
+-------aem-variables.info.txt-------
+
+--Purpose
+This is intended to be the place where all global variables are been defined. This file should be imported on each playbook
+that wants to use it. 
+It will help to create the playbooks as generic as possible and will let this file as central place to change any specific
+configuration.
+Important to mentioned, all global configuration mentioned here should not include password as thery will be stored on the
+aem-vault.yml file.
+
+--Parameters to recieve
+No parameters needed.
+
+--Response when calling this file
+No response returned. When this file is call, the caller file will be able to use all variables defined here.
+
+-Execution Flow
+This do not has any process or similar. It is just a standart variables file.
+
+--Standar way to call it
+To call it, this needs to be defined at playbook, play or task level.
+Usual ways are:
+
+    vars_files:
+                  - ../aem-variables.yml
+
+
+--Eaxamples
+* The next playbook is calling this file to be able to interpreted and use variables defined.
+
+              ---
+
+              - name: " AEM Dispatcher cache clear "
+                hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_NO"
+                user: ubuntu
+                vars_files:
+                  - ../aem-variables.yml
+                  - ../aem-vault.yml
+
+                tasks:
+
+                    - name: gather ec2 facts
+                      action: ec2_metadata_facts
+
+                    - name: " Delete cache inside dam/libs folder "
+                      file:
+                        path: "{{ aem_dispatcher_home_dir }}/{{ item.value.dir_name }}/"
+                        state: absent
+                      with_dict: "{{ aem_dispatcher_cache_dirs }}"
+
+
+
+
+
+-------aem-variables.info.txt-------
