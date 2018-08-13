@@ -1,0 +1,23 @@
+- name: gather ec2 facts
+  ction: ec2_metadata_facts
+
+- name: " List S3 Objects "
+  aws_s3:
+    bucket: "{{ deploy_s3_bucket_name }}"
+      prefix: "{{ prefix_name }}"
+      mode: list
+      aws_access_key: "{{ deploy_read_only_aws_key }}"
+      aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+  register: s3Objects
+  delegate_to: localhost
+
+- name: " Delete S3 objects "
+  aws_s3:
+    bucket: "{{ deploy_s3_bucket_name }}"
+    object: "{{ item }}"
+    mode: delobj
+    aws_access_key: "{{ deploy_read_only_aws_key }}"
+    aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+  with_items: "{{ s3Objects.s3_keys }}"
+  delegate_to: localhost
+  
