@@ -1,13 +1,13 @@
 - name: gather ec2 facts
-  ction: ec2_metadata_facts
+  action: ec2_metadata_facts
 
 - name: " List S3 Objects "
   aws_s3:
     bucket: "{{ deploy_s3_bucket_name }}"
-      prefix: "{{ prefix_name }}"
-      mode: list
-      aws_access_key: "{{ deploy_read_only_aws_key }}"
-      aws_secret_key: "{{ deploy_read_only_aws_secret }}"
+    prefix: "{{ prefix_name }}"
+    mode: list
+    aws_access_key: "{{ deploy_read_only_aws_key }}"
+    aws_secret_key: "{{ deploy_read_only_aws_secret }}"
   register: s3Objects
   delegate_to: localhost
 
