@@ -1,4 +1,17 @@
+- import_playbook: plays/aem-restart.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+
+
 - import_playbook: plays/aem_install_packages.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+
+- import_playbook: plays/aem-restart.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
