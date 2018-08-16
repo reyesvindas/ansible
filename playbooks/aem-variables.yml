@@ -1,15 +1,20 @@
 aem_root_dir: /data/adobe-aem6.*/*
 aem_service_name: aem61-*
-aem_startup_complete_msg: 'Quickstart started'
+aem_startup_complete_msg:
+  Dev: 'Quickstart started'
+  DevelopmentIntegrated: 'Quickstart started'
+  Test: 'Quickstart started'
+  Day1: 'Quickstart started'
+  Prod: 'Quickstart started'
 deploy_local_folder_packages: "/tmp/temp_deploy/packages"
 deploy_s3_bucket_name: "dam-aem-packages-repository"
 deploy_s3_bucket_prefix_release_deploy: "deployments"
 deploy_s3_bucket_prefix_config_task_deploy: "custom_packages"
 ansible_aws_local_group_owner: "intelall"
 ansible_aws_local_user_owner: "awx_intel"
-aem_dispatcher_home_dir: "/var/www/cache/*/dam/libs"
+aem_dispatcher_home_dir: "/var/www/cache/*/dam"
 aem_dispatcher_cache_dirs:
   folder1:
     dir_name: "libs"
   folder2:
-    dir_name: "content" 
+    dir_name: "content"
