@@ -14,6 +14,6 @@
 
       - name: " Delete cache inside dam/libs folder "
         file:
-          path: "{{ aem_dispatcher_home_dir }}/{{ item.value.dir_name }}/"
+          path: "{{ aem_dispatcher_home_dir[ec2_tag_Environment] }}/{{ item.value.dir_name }}/"
           state: absent
         with_dict: "{{ aem_dispatcher_cache_dirs }}"
