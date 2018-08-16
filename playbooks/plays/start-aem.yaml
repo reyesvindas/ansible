@@ -23,5 +23,5 @@
         register: cmdline
         failed_when: "cmdline.rc != 0"
         until: cmdline.rc == 0
-        retries: 950
-        delay: 3
+        retries: 1000
+        delay: 0.2
