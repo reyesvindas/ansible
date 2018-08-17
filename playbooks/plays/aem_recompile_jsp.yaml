@@ -1,0 +1,21 @@
+---
+
+- name: " Recompile AEM JSP "
+  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_YES"
+  user: ubuntu
+  vars_files:
+    - ../aem-variables.yml
+    - ../aem-vault.yml
+
+  tasks:
+
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
+
+      - name: " API Call to Recompile AEM JSP "
+        shell:
+          curl -u '{{ aem_user_name[ec2_tag_Environment] }}:{{ aem_user_password[ec2_tag_Environment] }}' http://{{ ansible_ec2_local_ipv4 }}:{{ ec2_tag_AEMPort }}/system/console/slingjsp?reset | tail -4 | grep 'code="200"'
+        delegate_to: localhost
+        with_items: "{{ files.stdout_lines }}"
+        register: result
+      - debug: var=result.stdout_lines
