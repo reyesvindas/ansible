@@ -18,4 +18,4 @@
           - aem-variables.yml
           - aem-vault.yml
         vars:
-          prefix_name: "deploy_s3_bucket_prefix[deploy_type]/{{ Environment }}/{{ Usage }}/{{ ec2_tag_Role }}"
+          prefix_name: "{{deploy_s3_bucket_prefix[deploy_type]}}/{{ Environment }}/{{ Usage }}/{{ ec2_tag_Role }}"
