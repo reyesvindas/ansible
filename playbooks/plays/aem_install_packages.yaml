@@ -17,7 +17,7 @@
           - ../aem-variables.yml
           - ../aem-vault.yml
         vars:
-          deploy_s3_bucket_prefix: "deployments"
+          deploy_type: "release_deploy"
 
 
       - name: " Get list of all packages"

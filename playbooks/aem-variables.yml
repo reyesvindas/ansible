@@ -8,6 +8,9 @@ aem_startup_complete_msg:
   Prod: 'Quickstart started'
 deploy_local_folder_packages: "/tmp/temp_deploy/packages"
 deploy_s3_bucket_name: "dam-aem-packages-repository"
+deploy_s3_bucket_prefix:
+  release_deploy: "deployments"
+  task_deploy: "custom_packages"
 deploy_s3_bucket_prefix_release_deploy: "deployments"
 deploy_s3_bucket_prefix_config_task_deploy: "custom_packages"
 ansible_aws_local_group_owner: "intelall"
