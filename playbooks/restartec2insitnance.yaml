@@ -1,0 +1,15 @@
+---
+
+- name: " Restart EC2 "
+  hosts: "localhost"
+  user: ubuntu
+  vars_files:
+    - ../aem-variables.yml
+    - ../aem-vault.yml
+
+  tasks:
+
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
+
+      - include_tasks: ../tasks/restart_ec2_instance.yml
