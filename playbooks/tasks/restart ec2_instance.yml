@@ -1,0 +1,7 @@
+- name: gather ec2 facts
+  action: ec2_metadata_facts
+
+- name: "Restart EC2 instance "
+  ec2:
+  	instance_id: "i-0942fb17b524e57f8"
+  	state: restarted
