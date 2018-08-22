@@ -3,5 +3,8 @@
 
 - name: "Restart EC2 instance "
   ec2:
-  	instance_id: i-0942fb17b524e57f8
+  	instance_ids: "{{ ec2_ids}}"
   	state: restarted
+  var:
+    ec2_ids:
+      - i-0942fb17b524e57f8
