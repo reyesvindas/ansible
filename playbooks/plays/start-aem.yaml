@@ -13,7 +13,7 @@
 
       - name: Start AEM service
         shell:
-          "sudo service {{aem_service_name}} start"
+          "sudo /etc/init.d/{{aem_service_name}} start"
         register: cmdline
         become: true
 

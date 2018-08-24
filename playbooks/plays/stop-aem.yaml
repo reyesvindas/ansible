@@ -13,7 +13,7 @@
 
       - name: Stop AEM service
         shell:
-          "sudo service {{ aem_service_name }} stop"
+          "sudo /etc/init.d/{{ aem_service_name }} stop"
         register: cmdline
         become: true
 
