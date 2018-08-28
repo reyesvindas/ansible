@@ -1,7 +1,7 @@
 ---
 
 - name: " AEM Dispatcher cache clear "
-  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_NO"
+  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_NO:&tag_Name_{{Name}}"
   user: ubuntu
   vars_files:
     - ../aem-variables.yml

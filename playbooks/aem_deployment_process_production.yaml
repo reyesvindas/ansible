@@ -4,6 +4,7 @@
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    Name: "*"
 
 - import_playbook: plays/aem_install_packages.yaml
   vars:
@@ -18,15 +19,18 @@
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    Name: "*"
 
 - import_playbook: plays/aem_recompile_jsp.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    Name: "*"
 
 - import_playbook: plays/aem_dispatcher_cache_clear.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    Name: "*"
