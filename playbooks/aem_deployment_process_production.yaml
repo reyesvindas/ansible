@@ -29,14 +29,14 @@
     deploy_type: "release_deploy"
     AEM_Instance_Name: "{{ AEM_Instance_Name }}"
 
-- import_playbook: plays/aem-restart.yaml
+- import_playbook: plays/aem_recompile_jsp.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
     AEM_Instance_Name: "{{ AEM_Instance_Name }}"
 
-- import_playbook: plays/aem_recompile_jsp.yaml
+- import_playbook: plays/aem-restart.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
