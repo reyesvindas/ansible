@@ -1,0 +1,20 @@
+---
+
+- name: " Removing server to ELB "
+  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_Name_{{Disp_Name}}"
+  user: ubuntu
+  vars_files:
+    - ../aem-variables.yml
+    - ../aem-vault.yml
+
+  tasks:
+    
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
+
+      - name: remove server out of the ELB
+        local_action:
+          module: ec2_elb
+          instance_id: "{{ ansible_ec2_instance_id }}"
+          region: "{{ ec2_region }}"
+          state: absent

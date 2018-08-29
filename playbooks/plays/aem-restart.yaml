@@ -3,11 +3,11 @@
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
-    Name: "{{ Name }}"
+    AEM_Instance_Name: "{{ AEM_Instance_Name }}"
 
 - import_playbook: start-aem.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
-    Name: "{{ Name }}"
+    AEM_Instance_Name: "{{ AEM_Instance_Name }}"

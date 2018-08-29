@@ -4,7 +4,7 @@
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
     deploy_type: "task_deploy"
-    Name: "*"
+    AEM_Instance_Name: "*"
 
 - import_playbook: s3_delete_bucket_aem_files.yaml
   vars:

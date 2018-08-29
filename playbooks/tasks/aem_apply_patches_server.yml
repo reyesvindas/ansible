@@ -1,0 +1,8 @@
+- name: gather ec2 facts
+  action: ec2_metadata_facts
+  
+- name: security patching
+  become: true
+  apt:
+    upgrade: dist
+    update_cache: yes

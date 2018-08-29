@@ -1,6 +1,6 @@
 ---
 
-- hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_YES:&tag_Name_{{Name}}"
+- hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_YES:&tag_Name_{{AEM_Instance_Name}}"
   user: ubuntu
   vars_files:
     - ../aem-variables.yml
@@ -11,18 +11,4 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
-      - name: Stop AEM service
-        shell:
-          "sudo /etc/init.d/{{ aem_service_name }} stop"
-        register: cmdline
-        become: true
-
-
-      - name: Check process
-        shell:
-          ps -elf | grep java | grep 'adobe*'
-        register: cmdline
-        failed_when: "cmdline.rc > 1"
-        until: cmdline.rc == 1
-        retries: 12
-        delay: 10
+      - include_tasks: ../tasks/aem_stop_service.yml

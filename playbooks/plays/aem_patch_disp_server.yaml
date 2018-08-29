@@ -1,6 +1,6 @@
 ---
 
-- name: " AEM Dispatcher cache clear "
+- name: " Patching on AEM servers "
   hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_NO:&tag_Name_{{Disp_Name}}"
   user: ubuntu
   vars_files:
@@ -12,8 +12,7 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
-      - name: " Delete cache inside dam/libs folder "
-        file:
-          path: "{{ aem_dispatcher_home_dir[ec2_tag_Role] }}/{{ item.value.dir_name }}/"
-          state: absent
-        with_dict: "{{ aem_dispatcher_cache_dirs }}"
+      - include_tasks: ../tasks/aem_apply_patches_server.yml
+
+      - include_tasks: ../tasks/aem_reboot_server.yml
+

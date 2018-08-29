@@ -1,0 +1,17 @@
+- name: gather ec2 facts
+  action: ec2_metadata_facts
+
+- name: Start AEM service
+  shell:
+   "sudo /etc/init.d/{{aem_service_name}} start"
+  register: cmdline
+  become: true
+
+- name: Validate Quick Started is completed
+  shell:
+    "cat {{aem_root_dir}}/crx-quickstart/logs/startup.log | grep '{{aem_startup_complete_msg[Environment]}}' "
+  register: cmdline
+  failed_when: "cmdline.rc != 0"
+  until: cmdline.rc == 0
+  retries: 20
+  delay: 15

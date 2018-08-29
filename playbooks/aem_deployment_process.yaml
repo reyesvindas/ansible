@@ -4,6 +4,7 @@
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    AEM_Instance_Name: "*"
 
 - import_playbook: plays/aem_install_packages.yaml
   vars:
@@ -11,22 +12,25 @@
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
     deploy_type: "release_deploy"
-    Name: "*"
+    AEM_Instance_Namee: "*"
 
 - import_playbook: plays/aem-restart.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    AEM_Instance_Name: "*"
 
 - import_playbook: plays/aem_recompile_jsp.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    AEM_Instance_Name: "*"
 
 - import_playbook: plays/aem_dispatcher_cache_clear.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
+    Disp_Name: "*"
