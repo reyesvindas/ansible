@@ -1,5 +1,49 @@
 
-- import_playbook: plays/aem_add_ec2_LB.yaml
+- import_playbook: plays/aem_remove_ec2_LB.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    Disp_Name: "{{ Disp_Name }}"
+
+- import_playbook: plays/aem_patch_aem_server.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    AEM_Instance_Name: "{{ AEM_Instance_Name }}"
+
+- import_playbook: plays/aem_patch_disp_server.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    Disp_Name: "{{ Disp_Name }}"
+
+
+- import_playbook: plays/aem_install_packages.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    deploy_type: "release_deploy"
+    AEM_Instance_Name: "{{ AEM_Instance_Name }}"
+
+- import_playbook: plays/aem_recompile_jsp.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    AEM_Instance_Name: "{{ AEM_Instance_Name }}"
+
+- import_playbook: plays/aem-restart.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    AEM_Instance_Name: "{{ AEM_Instance_Name }}"
+
+- import_playbook: plays/aem_dispatcher_cache_clear.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
