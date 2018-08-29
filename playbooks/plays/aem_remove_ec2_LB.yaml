@@ -13,8 +13,8 @@
         action: ec2_metadata_facts
 
       - name: remove server out of the ELB
-        local_action:
-          module: ec2_elb
+        ec2_elb:
           instance_id: "{{ ansible_ec2_instance_id }}"
           region: "{{ ec2_region }}"
           state: absent
+        delegate_to: localhost
