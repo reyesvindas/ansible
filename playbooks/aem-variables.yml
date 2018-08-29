@@ -16,8 +16,8 @@ deploy_s3_bucket_prefix:
 ansible_aws_local_group_owner: "intelall"
 ansible_aws_local_user_owner: "awx_intel"
 aem_dispatcher_home_dir:
-  Author: "/var/www/cache/author/dam"
-  Publisher: "/var/www/cache/publish/dam"
+  AuthorDispatcher: "/var/www/cache/author/dam"
+  PublisherDispatcher: "/var/www/cache/publish/dam"
 aem_dispatcher_cache_dirs:
   folder1:
     dir_name: "libs"
