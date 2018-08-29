@@ -3,7 +3,7 @@
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
-    Role: "{{ Role }}Dispatcher"
+    Role: "{{ Role }}"
     Disp_Name: "{{ Disp_Name }}"
 
 - import_playbook: plays/aem_patch_aem_server.yaml
@@ -17,7 +17,7 @@
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
-    Role: "{{ Role }}Dispatcher"
+    Role: "{{ Role }}"
     Disp_Name: "{{ Disp_Name }}"
 
 
@@ -47,5 +47,5 @@
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
-    Role: "{{ Role }}Dispatcher"
-    Disp_Name: "{{ Disp_Name }}Dispatcher"
+    Role: "{{ Role }}"
+    Disp_Name: "{{ Disp_Name }}"
