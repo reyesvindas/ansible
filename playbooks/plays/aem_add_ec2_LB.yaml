@@ -1,7 +1,7 @@
 ---
 
 - name: " Adding server to ELB "
-  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_Name_{{Disp_Name}}"
+  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}Dispatcher:&tag_Name_{{Disp_Name}}"
   user: ubuntu
   vars_files:
     - ../aem-variables.yml
