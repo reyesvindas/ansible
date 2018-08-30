@@ -12,7 +12,7 @@
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
     deploy_type: "release_deploy"
-    AEM_Instance_Namee: "*"
+    AEM_Instance_Name: "*"
 
 - import_playbook: plays/aem-restart.yaml
   vars:
