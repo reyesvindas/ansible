@@ -1,0 +1,23 @@
+
+- import_playbook: plays/aem_remove_ec2_LB.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    Disp_Name: "{{ Disp_Name }}"
+
+- import_playbook: plays/resize_disk_aem_server.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    AEM_Instance_Name: "{{ AEM_Instance_Name }}"
+
+
+- import_playbook: plays/aem_add_ec2_LB.yaml
+  vars:
+    Environment: "{{ Environment }}"
+    Usage: "{{ Usage }}"
+    Role: "{{ Role }}"
+    Disp_Name: "{{ Disp_Name }}"
+    
