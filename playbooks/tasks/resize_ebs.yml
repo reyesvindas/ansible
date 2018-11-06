@@ -1,0 +1,9 @@
+- name: gather ec2 facts
+  action: ec2_metadata_facts
+
+- name: Resize EBS
+  shell:
+   "sudo resize2fs /dev/nvme1n1"
+  register: cmdline
+  become: true
+  ignore_errors: yes

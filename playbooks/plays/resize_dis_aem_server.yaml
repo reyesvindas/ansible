@@ -1,0 +1,22 @@
+---
+
+- name: " Resize of EBS on AEM servers "
+  hosts: "tag_Environment_{{Environment}}:&tag_Usage_{{Usage}}:&tag_Role_{{Role}}:&tag_AEMInstance_YES:&tag_Name_{{AEM_Instance_Name}}"
+  user: ubuntu
+  vars_files:
+    - ../aem-variables.yml
+    - ../aem-vault.yml
+
+  tasks:
+    
+      - name: gather ec2 facts
+        action: ec2_metadata_facts
+
+      - include_tasks: ../tasks/aem_stop_service.yml
+
+      - include_tasks: ../tasks/aem_reboot_server.yml
+
+      - include_tasks: ../tasks/resize_ebs.yml
+
+      - include_tasks: ../tasks/aem_start_service.yml
+
