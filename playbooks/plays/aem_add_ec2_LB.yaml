@@ -17,5 +17,4 @@
           module: ec2_elb
           instance_id: "{{ ansible_ec2_instance_id }}"
           region: "{{ ec2_region }}"
-          ec2_elbs: "{{ elb_name }}"
           state: present
