@@ -1,24 +1,10 @@
 
-- import_playbook: plays/aem-restart.yaml
-  vars:
-    Environment: "{{ Environment }}"
-    Usage: "{{ Usage }}"
-    Role: "{{ Role }}"
-    AEM_Instance_Name: "*"
-
 - import_playbook: plays/aem_install_packages.yaml
   vars:
     Environment: "{{ Environment }}"
     Usage: "{{ Usage }}"
     Role: "{{ Role }}"
     deploy_type: "release_deploy"
-    AEM_Instance_Name: "*"
-
-- import_playbook: plays/aem-restart.yaml
-  vars:
-    Environment: "{{ Environment }}"
-    Usage: "{{ Usage }}"
-    Role: "{{ Role }}"
     AEM_Instance_Name: "*"
 
 - import_playbook: plays/aem_recompile_jsp.yaml
