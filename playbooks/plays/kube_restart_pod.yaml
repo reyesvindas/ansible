@@ -25,9 +25,11 @@
         set_fact: 
           dataresult: "{{ pod_list.stdout | from_json }}"
 
-      - name: debug fact
+      - name: debug dated
         set_fact:
           datedir: "{{ dataresult.items | dictsort }}"
+
+      - name: debug fact
         debug:
           msg: "{{ datedir[0] }}"
 
