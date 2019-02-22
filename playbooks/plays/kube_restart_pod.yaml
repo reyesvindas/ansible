@@ -23,7 +23,7 @@
 
       - name: debug stdout
         set_fact: 
-        dataresult: "{{ pod_list.stdout | from_json }}"
+          dataresult: "{{ pod_list.stdout | from_json }}"
 
       - name: debug fact
         debug:
