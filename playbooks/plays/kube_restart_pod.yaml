@@ -21,13 +21,12 @@
         register: pod_list
       - debug: var=pod_list.stdout_lines
 
-      - name: debug stdout
-        set_fact: 
-          dataresult: "{{ pod_list.stdout | from_json }}"
+      - set_fact: 
+          pod_list_json: "{{ pod_list.stdout | from_json }}"
 
       - name: debug fact
         debug:
-          msg: "{{ dataresult['items'][0].metadata }}"
+          msg: "{{ pod_list_json['items'][0].metadata.name }}"
 
       - name: Delete pods
         shell:
