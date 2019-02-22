@@ -35,3 +35,5 @@
           'curl -X DELETE  -H ''Authorization: Bearer {{ kube_api_token }}'' -H Accept: application/json  -H Content-Type: application/json  {{ kube_api_url }}/namespaces/{{ kube_namespace }}/pods/{{ item.metadata.name }}'
         delegate_to: localhost
         with_items: "{{ pod_list_json['items'] }}"
+        loop_control:
+          pause: 60
