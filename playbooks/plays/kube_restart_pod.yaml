@@ -25,13 +25,9 @@
         set_fact: 
           dataresult: "{{ pod_list.stdout | from_json }}"
 
-      - name: debug dated
-        set_fact:
-          datedir: "{{ dataresult.items | dictsort }}"
-
       - name: debug fact
         debug:
-          msg: "{{ datedir[0] }}"
+          msg: "{{ dataresult.items[0] }}"
 
       - name: Delete pods
         shell:
