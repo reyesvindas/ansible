@@ -23,3 +23,4 @@ aem_dispatcher_cache_dirs:
     dir_name: "libs"
   folder2:
     dir_name: "content"
+kube_api_url: "https://vessel.intel.com/r/projects/1a7640/kubernetes:6443/api/v1"

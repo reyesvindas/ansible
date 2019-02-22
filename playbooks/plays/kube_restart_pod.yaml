@@ -11,5 +11,19 @@
       - name: gather ec2 facts
         action: ec2_metadata_facts
 
-      - include_tasks: ../tasks/kube_get_list_pods_label.yml
-      - debug: var=result
+      - name: kube get list of pods based on label
+        action: ec2_metadata_facts
+
+      - name: Query list of pods
+        shell:
+          'curl -X GET  -H ''Authorization: Bearer {{ kube_api_token }}'' -H Accept: application/json  -H Content-Type: application/json {{ kube_api_url }}/namespaces/{{ kube_namespace }}/pods?labelSelector={{ kube_label_selector_pods }}'
+        delegate_to: localhost
+        register: pod_list
+      - debug: var=pod_list.items
+
+
+      - name: Delete pods
+        shell:
+          'curl -X DELETE  -H ''Authorization: Bearer {{ kube_api_token }}'' -H Accept: application/json  -H Content-Type: application/json  {{ kube_api_url }}/namespaces/{{ kube_namespace }}/pods/item.metadata.name'
+        delegate_to: localhost
+        with_items: "{{ pod_list.items }}"
