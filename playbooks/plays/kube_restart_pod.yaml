@@ -27,7 +27,7 @@
 
       - name: debug fact
         debug:
-          msg: "{{ dataresult.items[0].metadata.name }}"
+          msg: "{{ dataresult.items[0].metadata }}"
 
       - name: Delete pods
         shell:
