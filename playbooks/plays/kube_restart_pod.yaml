@@ -19,10 +19,12 @@
           'curl -X GET  -H ''Authorization: Bearer {{ kube_api_token }}'' -H Accept: application/json  -H Content-Type: application/json {{ kube_api_url }}/namespaces/{{ kube_namespace }}/pods?labelSelector={{ kube_label_selector_pods }}'
         delegate_to: localhost
         register: pod_list
-      - debug: var=pod_list.stdout_lines
 
       - set_fact: 
           pod_list_json: "{{ pod_list.stdout | from_json }}"
+    
+      - name: "debug pod list"
+        debug: var=pod_list_json
 
       - name: debug fact
         debug:
@@ -30,6 +32,6 @@
 
       - name: Delete pods
         shell:
-          'curl -X DELETE  -H ''Authorization: Bearer {{ kube_api_token }}'' -H Accept: application/json  -H Content-Type: application/json  {{ kube_api_url }}/namespaces/{{ kube_namespace }}/pods/item.metadata.name'
+          'curl -X DELETE  -H ''Authorization: Bearer {{ kube_api_token }}'' -H Accept: application/json  -H Content-Type: application/json  {{ kube_api_url }}/namespaces/{{ kube_namespace }}/pods/{{ item.metadata.name }}'
         delegate_to: localhost
-        with_items: "{{ pod_list.stdout_lines.items }}"
+        with_items: "{{ pod_list_json['items'] }}"
