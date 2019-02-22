@@ -3,6 +3,6 @@
 
 - name: Query list of pods
   shell:
-    curl -X GET  -H ' Authorization: Bearer QmFzaWMgUVRsQ09VWXpPREF5UVVOQlFUSTVRa1ZGUWtFNlpFUmpRa3N6TWtkRmQwVlZSak5UZUdWT1MweFdXblZ4UVVSdlZqZFRNMmxFY201TVRYSmlSQT09' -H 'Accept: application/json'  -H 'Content-Type: application/json' https://vessel.intel.com/r/projects/1a7640/kubernetes:6443/api/v1/namespaces/pimms-pre/pods?labelSelector=app=pim-ms-pp-gw
+    'curl -X GET  -H ''Authorization: Bearer QmFzaWMgUVRsQ09VWXpPREF5UVVOQlFUSTVRa1ZGUWtFNlpFUmpRa3N6TWtkRmQwVlZSak5UZUdWT1MweFdXblZ4UVVSdlZqZFRNMmxFY201TVRYSmlSQT09'' -H Accept: application/json  -H Content-Type: application/json https://vessel.intel.com/r/projects/1a7640/kubernetes:6443/api/v1/namespaces/pimms-pre/pods?labelSelector=app=pim-ms-pp-gw'
   delegate_to: localhost
   register: result
