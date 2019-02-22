@@ -12,3 +12,4 @@
         action: ec2_metadata_facts
 
       - include_tasks: ../tasks/kube_get_list_pods_label.yml
+      - debug: var=result
