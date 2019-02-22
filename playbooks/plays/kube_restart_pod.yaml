@@ -19,7 +19,15 @@
           'curl -X GET  -H ''Authorization: Bearer {{ kube_api_token }}'' -H Accept: application/json  -H Content-Type: application/json {{ kube_api_url }}/namespaces/{{ kube_namespace }}/pods?labelSelector={{ kube_label_selector_pods }}'
         delegate_to: localhost
         register: pod_list
-      - debug: var=pod_list.stdout.items
+      - debug: var=pod_list.stdout_lines
+
+      - name: debug stdout
+        set_fact: 
+        dataresult: "{{ pod_list.stdout | from_json }}"
+
+      - name: debug fact
+        debug:
+          msg: "{{ dataresult.items[0].name }}"
 
       - name: Delete pods
         shell:
