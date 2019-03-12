@@ -1,0 +1,20 @@
+---
+- hosts: all
+  vars:
+    lvm_groups:
+      - vgname: vg1
+        disks:
+          - /dev/sdc1
+          - /dev/sdc2
+        create: true 
+        lvnames:
+          - lvname: vol01 
+            size: 100%FREE 
+            create: true
+            filesystem: ext3
+            mount: true
+            mntp: /opt/Alfresco
+    manage_lvm: true
+  roles:
+    - role: ansible-manage-lvm
+  tasks:
