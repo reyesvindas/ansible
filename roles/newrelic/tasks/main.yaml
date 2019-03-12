@@ -1,0 +1,15 @@
+---
+
+- name: Download New Relic NewRelicAgent
+  get_url:
+    url: https://download.newrelic.com/infrastructure_agent/linux/zypp/sles/11.4/x86_64/newrelic-infra-1.0.1000-1.x86_64.rpm
+    dest: /tmp/
+    mode: 0750
+
+- name: Create config file
+  template: src=newrelic-infra.j2 dest=/etc/newrelic-infra.yml owner=root group=root
+
+- name: Install New Relic
+  zypper:
+    name: /tmp/newrelic-infra-1.0.1000-1.x86_64.rpm
+    state: present
